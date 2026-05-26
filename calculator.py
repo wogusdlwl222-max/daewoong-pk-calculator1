@@ -8,7 +8,7 @@ import math
 st.set_page_config(page_title="Formulation & PK 통합 계산기", layout="wide")
 
 # =========================================================================
-# 🎨 글로벌 메디컬 스타일 전용 커스텀 CSS 인젝션 (글씨 색상 버그 완벽 수정)
+# 🎨 글로벌 메디컬 스타일 전용 커스텀 CSS 인젝션
 # =========================================================================
 st.markdown("""
     <style>
@@ -20,14 +20,14 @@ st.markdown("""
             font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif !important;
         }
         
-        /* [핵심 수정] 입력창 영역 내의 모든 라벨 및 텍스트 강제 블랙 고정 */
+        /* 입력창 영역 내의 모든 라벨 및 텍스트 강제 블랙 고정 */
         div[data-testid="stWidgetLabel"] p {
             color: #1e293b !important;
             font-weight: 500 !important;
             font-size: 13.5px !important;
         }
         
-        /* [핵심 수정] 인풋 박스 내부 숫자 및 텍스트 블랙 고정 */
+        /* 인풋 박스 내부 숫자 및 텍스트 블랙 고정 */
         .stNumberInput input {
             color: #000000 !important;
             font-weight: 600 !important;
@@ -292,15 +292,4 @@ with tab5:
             
             st.markdown("---")
             if calc_mode == "중량 농도(mg/mL) ➡️ 몰 농도(mM) 도출":
-                input_mg = st.number_input("내가 조제한 중량 농도 입력 (mg/mL)", min_value=0.0, value=16.9659, step=0.1)
-                output_mm = (input_mg / mw_value) * 1000
-            else:
-                input_mm = st.number_input("내가 타겟팅하는 몰 농도 입력 (mM)", min_value=0.0, value=40.86, step=0.01)
-                output_mg = (input_mm * mw_value) / 1000
-
-    with col_mw2:
-        with st.container(border=True):
-            st.markdown("<p style='font-size:15px; font-weight:bold; color:#ba3c46; margin-top:0;'>[OUTPUT] 최종 환산 결과 확인</p>", unsafe_allow_html=True)
-            if calc_mode == "중량 농도(mg/mL) ➡️ 몰 농도(mM) 도출":
-                st.metric(label="도출된 최종 몰 농도", value=f"{output_mm:.4f} mM")
-                report_mw = {"약물 분자량 (MW)":
+                input_mg = st.number_input("내가 조제한 중량 농도 입력 (mg/mL)", min_value=0.0, value=16.
