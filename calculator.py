@@ -277,7 +277,7 @@ with tab4:
             """, unsafe_allow_html=True)
 
 # =========================================================================
-# [Tab 5] MW - mg/mL - mM 몰농도 변환기
+# [Tab 5] MW - mg/mL - mM 몰농도 변환기 (괄호 누락 버그 해결 완료)
 # =========================================================================
 with tab5:
     st.markdown("<h3 style='color:#002b5c; margin-bottom:5px;'>MW(분자량) - 중량 농도(mg/mL) - 몰 농도(mM) 상호 환산기</h3>", unsafe_allow_html=True)
@@ -292,4 +292,31 @@ with tab5:
             
             st.markdown("---")
             if calc_mode == "중량 농도(mg/mL) ➡️ 몰 농도(mM) 도출":
-                input_mg = st.number_input("내가 조제한 중량 농도 입력 (mg/mL)", min_value=0.0, value=16.
+                input_mg = st.number_input("내가 조제한 중량 농도 입력 (mg/mL)", min_value=0.0, value=16.9659, step=0.1)
+                output_mm = (input_mg / mw_value) * 1000
+            else:
+                input_mm = st.number_input("내가 타겟팅하는 몰 농도 입력 (mM)", min_value=0.0, value=40.86, step=0.01)
+                output_mg = (input_mm * mw_value) / 1000
+
+    with col_mw2:
+        with st.container(border=True):
+            st.markdown("<p style='font-size:15px; font-weight:bold; color:#ba3c46; margin-top:0;'>[OUTPUT] 최종 환산 결과 확인</p>", unsafe_allow_html=True)
+            if calc_mode == "중량 농도(mg/mL) ➡️ 몰 농도(mM) 도출":
+                st.metric(label="도출된 최종 몰 농도", value=f"{output_mm:.4f} mM")
+                report_mw = {
+                    "약물 분자량 (MW)": [f"{mw_value:.2f} g/mol"], 
+                    "내가 입력한 중량농도": [f"{input_mg:.4f} mg/mL"], 
+                    "시스템 도출 몰농도": [f"{output_mm:.4f} mM"]
+                }
+            else:
+                st.metric(label="도출된 최종 중량 농도", value=f"{output_mg:.4f} mg/mL")
+                report_mw = {
+                    "약물 분자량 (MW)": [f"{mw_value:.2f} g/mol"], 
+                    "내가 입력한 몰농도": [f"{input_mm:.2f} mM"], 
+                    "시스템 도출 필요중량": [f"{output_mg:.4f} mg/mL"]
+                }
+                
+            st.dataframe(pd.DataFrame(report_mw), width="stretch", hide_index=True)
+
+# 글로벌 테이블 폰트 제어 및 최종 스타일 마감
+st.markdown("<style>div[data-testid='stDataFrame'] table td {color: #000000 !important; font-family: 'Malgun Gothic', sans-serif !important;}</style>", unsafe_allow_html=True)
