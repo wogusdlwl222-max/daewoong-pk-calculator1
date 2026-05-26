@@ -8,7 +8,7 @@ import math
 st.set_page_config(page_title="Formulation & PK 통합 계산기", layout="wide")
 
 # =========================================================================
-# 🎨 글로벌 메디컬 스타일 전용 커스텀 CSS 인젝션
+# 🎨 글로벌 메디컬 스타일 전용 커스텀 CSS 인젝션 (클라우드 테마 충돌 완벽 방어)
 # =========================================================================
 st.markdown("""
     <style>
@@ -20,18 +20,28 @@ st.markdown("""
             font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif !important;
         }
         
-        /* 입력창 영역 내의 모든 라벨 및 텍스트 강제 블랙 고정 */
+        /* [스트림릿 전용 클래스 직접 타격] 인풋 상자 전체 가독성 강제 블랙 교정 */
         div[data-testid="stWidgetLabel"] p {
             color: #1e293b !important;
-            font-weight: 500 !important;
-            font-size: 13.5px !important;
+            font-weight: 700 !important;
+            font-size: 14px !important;
         }
         
-        /* 인풋 박스 내부 숫자 및 텍스트 블랙 고정 */
-        .stNumberInput input {
+        /* 인풋 박스 배경은 하얗게, 내부 텍스트와 숫자는 무조건 진한 블랙으로 고정 */
+        .stNumberInput div div input {
             color: #000000 !important;
-            font-weight: 600 !important;
+            -webkit-text-fill-color: #000000 !important;
+            font-weight: 700 !important;
+            font-size: 15px !important;
             background-color: #ffffff !important;
+        }
+        
+        /* 라디오 버튼 및 선택 상자 텍스트 가독성 확보 */
+        .stRadio div role {
+            color: #1e293b !important;
+        }
+        div[data-testid="stMarkdownContainer"] p {
+            color: #1e293b !important;
         }
         
         /* 탭 디자인 개편 */
@@ -277,7 +287,7 @@ with tab4:
             """, unsafe_allow_html=True)
 
 # =========================================================================
-# [Tab 5] MW - mg/mL - mM 몰농도 변환기 (괄호 누락 버그 해결 완료)
+# [Tab 5] MW - mg/mL - mM 몰농도 변환기
 # =========================================================================
 with tab5:
     st.markdown("<h3 style='color:#002b5c; margin-bottom:5px;'>MW(분자량) - 중량 농도(mg/mL) - 몰 농도(mM) 상호 환산기</h3>", unsafe_allow_html=True)
@@ -318,5 +328,5 @@ with tab5:
                 
             st.dataframe(pd.DataFrame(report_mw), width="stretch", hide_index=True)
 
-# 글로벌 테이블 폰트 제어 및 최종 스타일 마감
+# 글로벌 테이블 폰트 제어 스타일 마감
 st.markdown("<style>div[data-testid='stDataFrame'] table td {color: #000000 !important; font-family: 'Malgun Gothic', sans-serif !important;}</style>", unsafe_allow_html=True)
