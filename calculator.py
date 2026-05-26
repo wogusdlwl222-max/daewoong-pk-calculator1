@@ -104,11 +104,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ★ [보정 완료] 상단 메인 블루 헤더 내부의 서브타이틀 글씨색을 선명한 화이트로 강제 고정
+# 💡 [진짜 보정 완료] 인라인 스타일로 서브타이틀 글씨색을 선명한 화이트(#ffffff)로 다이렉트 고정 마감!
 st.markdown("""
     <div style="background: linear-gradient(135deg, #002b5c 0%, #0056b3 100%); padding: 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 30px;">
         <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">🧪 Formulation & PK Intelligence Integrated Platform</h1>
-        <p style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; margin: 12px 0 0 0; font-size: 14.5px; font-weight: 500; opacity: 1.0; letter-spacing: 0.5px;">Daewoong Formulation Planning Team • 실무용 예측 시뮬레이터</p>
+        <p style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; margin: 12px 0 0 0; font-size: 14.5px; font-weight: 400; opacity: 1.0 !important; letter-spacing: 0.5px;">Daewoong Formulation Planning Team • 실무용 예측 시뮬레이터</p>
     </div>
 """, unsafe_allow_html=True)
 
