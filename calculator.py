@@ -8,7 +8,7 @@ import math
 st.set_page_config(page_title="Formulation & PK 통합 계산기", layout="wide")
 
 # =========================================================================
-# 🎨 글로벌 메디컬 스타일 전용 커스텀 CSS 인젝션 (클라우드 테마 충돌 완벽 방어)
+# 🎨 글로벌 메디컬 스타일 전용 커스텀 CSS 인젝션 (탭 글씨 색상 완벽 수정)
 # =========================================================================
 st.markdown("""
     <style>
@@ -20,14 +20,14 @@ st.markdown("""
             font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif !important;
         }
         
-        /* [스트림릿 전용 클래스 직접 타격] 인풋 상자 전체 가독성 강제 블랙 교정 */
+        /* 인풋 상자 전체 라벨 가독성 블랙 교정 */
         div[data-testid="stWidgetLabel"] p {
             color: #1e293b !important;
             font-weight: 700 !important;
             font-size: 14px !important;
         }
         
-        /* 인풋 박스 배경은 하얗게, 내부 텍스트와 숫자는 무조건 진한 블랙으로 고정 */
+        /* 인풋 박스 내부 텍스트와 숫자는 무조건 진한 블랙으로 고정 */
         .stNumberInput div div input {
             color: #000000 !important;
             -webkit-text-fill-color: #000000 !important;
@@ -36,15 +36,14 @@ st.markdown("""
             background-color: #ffffff !important;
         }
         
-        /* 라디오 버튼 및 선택 상자 텍스트 가독성 확보 */
-        .stRadio div role {
-            color: #1e293b !important;
-        }
         div[data-testid="stMarkdownContainer"] p {
             color: #1e293b !important;
         }
         
-        /* 탭 디자인 개편 */
+        /* ==========================================
+           ★ [탭 제목 가독성 완벽 교정 세션]
+           ========================================== */
+        /* 탭 바 전체 레이아웃 */
         .stTabs [data-baseweb="tab-list"] {
             gap: 10px;
             background-color: #ffffff;
@@ -53,12 +52,14 @@ st.markdown("""
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
             margin-bottom: 20px;
         }
+        
+        /* 기본 선택 안 된 일반 탭 스타일 및 글씨색 선명화 */
         .stTabs [data-baseweb="tab"] {
             height: 45px;
             white-space: pre-wrap;
             background-color: #f1f5f9;
             border-radius: 6px;
-            color: #475569 !important;
+            color: #334155 !important;
             font-weight: 500;
             padding: 0px 20px;
             transition: all 0.2s ease;
@@ -67,11 +68,18 @@ st.markdown("""
             background-color: #e2e8f0;
             color: #0f172a !important;
         }
+        
+        /* 💡 활성화된(선택된) 탭 제목 글씨를 선명한 화이트로 강제 고정 */
         .stTabs [aria-selected="true"] {
             background-color: #002b5c !important;
-            color: #ffffff !important;
-            font-weight: 700 !important;
             box-shadow: 0 4px 6px rgba(0,43,92,0.15);
+        }
+        .stTabs [aria-selected="true"] span, 
+        .stTabs [aria-selected="true"] p,
+        .stTabs [aria-selected="true"] div {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+            font-weight: 700 !important;
         }
         
         /* 안내 상자 */
