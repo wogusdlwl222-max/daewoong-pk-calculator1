@@ -8,14 +8,30 @@ import math
 st.set_page_config(page_title="Formulation & PK 통합 계산기", layout="wide")
 
 # =========================================================================
-# 🎨 글로벌 메디컬 스타일 전용 커스텀 CSS 인젝션
+# 🎨 글로벌 메디컬 스타일 전용 커스텀 CSS 인젝션 (글씨 색상 버그 완벽 수정)
 # =========================================================================
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        /* 메인 백그라운드 및 기본 서체 고정 */
         html, body, [data-testid="stAppViewContainer"] {
             background-color: #f8fafc !important;
             font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif !important;
+        }
+        
+        /* [핵심 수정] 입력창 영역 내의 모든 라벨 및 텍스트 강제 블랙 고정 */
+        div[data-testid="stWidgetLabel"] p {
+            color: #1e293b !important;
+            font-weight: 500 !important;
+            font-size: 13.5px !important;
+        }
+        
+        /* [핵심 수정] 인풋 박스 내부 숫자 및 텍스트 블랙 고정 */
+        .stNumberInput input {
+            color: #000000 !important;
+            font-weight: 600 !important;
+            background-color: #ffffff !important;
         }
         
         /* 탭 디자인 개편 */
@@ -287,12 +303,4 @@ with tab5:
             st.markdown("<p style='font-size:15px; font-weight:bold; color:#ba3c46; margin-top:0;'>[OUTPUT] 최종 환산 결과 확인</p>", unsafe_allow_html=True)
             if calc_mode == "중량 농도(mg/mL) ➡️ 몰 농도(mM) 도출":
                 st.metric(label="도출된 최종 몰 농도", value=f"{output_mm:.4f} mM")
-                report_mw = {"약물 분자량 (MW)": [f"{mw_value:.2f} g/mol"], "내가 입력한 중량농도": [f"{input_mg:.4f} mg/mL"], "시스템 도출 몰농도": [f"{output_mm:.4f} mM"]}
-            else:
-                st.metric(label="도출된 최종 중량 농도", value=f"{output_mg:.4f} mg/mL")
-                report_mw = {"약물 분자량 (MW)": [f"{mw_value:.2f} g/mol"], "내가 입력한 몰농도": [f"{input_mm:.2f} mM"], "시스템 도출 필요중량": [f"{output_mg:.4f} mg/mL"]}
-                
-            st.dataframe(pd.DataFrame(report_mw), width="stretch", hide_index=True)
-
-# [보정 완결] 글로벌 테이블 폰트 제어 스타일 닫는 괄호 버그 해결 매핑 완료
-st.markdown("<style>div[data-testid='stDataFrame'] table td {color: #000000 !important; font-family: 'Malgun Gothic', sans-serif !important;}</style>", unsafe_allow_html=True)
+                report_mw = {"약물 분자량 (MW)":
